@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        #main {
+            width: 800px;
+            height: 600px;
+        }
+
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="main"></div>
+
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/jquery-3.3.1.js"></script>
+    <script>
+        /**
+         * 图标所需数据
+         */
+        var data = {
+            value: 24.2,
+            text: '世间',
+            color: '#6192f4',
+            title: '饼图'
+        }
+
+        let value = data.value || 0
+        var option = {
+            title: {
+                text: '标题',
+                subtext: '副标题',
+                x: 'center',
+                y: 'center',
+            },
+            backgroundColor: '#fff',
+            grid: {
+                left: 0
+            },
+            legend: {
+                orient: 'vertical',
+                icon: 'circle',
+                width: 8,
+                height: 8,
+                bottom: 20,
+                x: 'center',
+                data: ['世间','占位']
+            },
+            tooltip: {
+                trigger: 'item',
+                //   formatter: '{c}%'
+            },
+            series: [{
+                type: 'pie',
+                radius: ['85', '100'],
+                center: ['50%', '50%'],
+                hoverAnimation: false,
+                label: {
+                    normal: {
+                        position: 'center'
+                    }
+                },
+                data: [{
+                        value: value,
+                        name: data.text,
+                        itemStyle: {
+                            normal: {
+                                color: '#6192f4',
+                            },
+                            emphasis: {
+                                color: '#6192f4'
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: false,
+                                // formatter: '{d} %',
+                                textStyle: {
+                                    fontSize: 40,
+                                    fontWeight: 600,
+                                    color: '#505066',
+                                }
+                            }
+                        }
+                    },
+                    {
+                        value: 100 - value,
+                        name: '占位',
+                        tooltip: {
+                            show: false
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#f0f3f8',
+                            },
+                            emphasis: {
+                                color: '#f0f3f8'
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: false,
+                                formatter: value + '',
+                                textStyle: {
+                                    lineHeight: 30,
+                                    fontSize: 20,
+                                    color: '#ced1e4'
+                                }
+                            },
+
+                        }
+                    }
+                ]
+            }]
+        }
+
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

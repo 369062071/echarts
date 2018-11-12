@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        #main {
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="main"></div>
+
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/jquery-3.3.1.js"></script>
+    <script>
+        // app.title = '环形图';
+        var data = {
+            data: [{
+                    value: 335,
+                    name: '直接访问'
+                },
+                {
+                    value: 310,
+                    name: '邮件营销'
+                },
+                {
+                    value: 234,
+                    name: '联盟广告'
+                },
+                {
+                    value: 135,
+                    name: '视频广告'
+                },
+                {
+                    value: 1548,
+                    name: '搜索引擎'
+                }
+            ],
+            legend: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        }
+
+        var option = {
+            grid: {
+                left: 40,
+                right: 40,
+                bottom: 30,
+                // top: 40,
+            },
+            legend: {
+                data: ['每日累计指派任务'],
+                // align: 'right',
+                right: 10,
+                icon: 'circle',
+                itemWidth: 8,
+                itemHeight: 8,
+                textStyle: {
+                    padding: [0, 8, 0, 4],
+                    color: '#9599b2',
+                    fontStyle: 'normal',
+                    fontSize: 14,
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#ddd'
+                    }
+                },
+                // backgroundColor: 'rgba(255,255,255,1)',
+                padding: [5, 10],
+                // textStyle: {
+                //     color: '#fff',
+                // },
+                extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)'
+            },
+            xAxis: {
+                show: true,
+                type: 'category',
+                data: [], // X轴数据
+                boundaryGap: false,
+                splitLine: {
+                    show: false,
+                    interval: 'auto',
+                    lineStyle: {
+                        color: ['#D4DFF5']
+                    }
+                },
+                axisTick: {
+                    show: false,
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: '#609ee9'
+                    }
+                },
+                axisLabel: {
+                    margin: 10,
+                    textStyle: {
+                        fontSize: 12,
+                        color: '#60637b'
+                    }
+                }
+            },
+            yAxis: {
+                show: true,
+                type: 'value',
+                splitLine: {
+                    lineStyle: {
+                        color: '#f0f3f8'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: '#609ee9'
+                    }
+                },
+                axisLabel: {
+                    show: false,
+                    margin: 10,
+                    textStyle: {
+                        fontSize: 14,
+                        // color: '#fff'
+                    }
+                }
+            },
+            series: [{
+                name: '每日累计指派任务',
+                type: 'line',
+                smooth: true,
+                symbolSize: 6,
+                showSymbol: true,
+                data: [],
+                areaStyle: {
+                    normal: {
+                        color: {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 0,
+                            y2: 1,
+                            colorStops: [{
+                                offset: 0,
+                                color: 'rgba(1,133,241,0.06)' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: 'rgba(1,133,241,0.02)' // 100% 处的颜色
+                            }],
+
+                            globalCoord: false // 缺省为 false
+                        },
+
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: "#6192f4",
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 1
+                    }
+                }
+            }]
+        };
+        var data = {"project_member": 61, "assigned_task": 13, "complete_task": 4, "day_accumulated_list": [{"total_date": "2018-09-02", "day_accumulated_task": 10, "per_capita_working_hours": 0}, {"total_date": "2018-09-03", "day_accumulated_task": 10, "per_capita_working_hours": 0}, {"total_date": "2018-09-04", "day_accumulated_task": 10, "per_capita_working_hours": 0}, {"total_date": "2018-09-05", "day_accumulated_task": 10, "per_capita_working_hours": 0}, {"total_date": "2018-09-06", "day_accumulated_task": 10, "per_capita_working_hours": 0}, {"total_date": "2018-09-07", "day_accumulated_task": 10, "per_capita_working_hours": 0}, {"total_date": "2018-09-13", "day_accumulated_task": 11, "per_capita_working_hours": 0}, {"total_date": "2018-09-17", "day_accumulated_task": 9, "per_capita_working_hours": 0}, {"total_date": "2018-09-18", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-19", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-20", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-21", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-22", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-23", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-24", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-25", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-26", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-27", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-09-28", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-10-08", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-10-09", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-10-10", "day_accumulated_task": 12, "per_capita_working_hours": 0}, {"total_date": "2018-10-11", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-12", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-13", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-14", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-15", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-16", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-17", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-18", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-19", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-20", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-21", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-22", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-23", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-24", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-25", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-26", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-27", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-28", "day_accumulated_task": 13, "per_capita_working_hours": 0}, {"total_date": "2018-10-30", "day_accumulated_task": 13, "per_capita_working_hours": 0}]}
+
+        var dataList = data.day_accumulated_list;
+        var xData = [];
+        var yData = [];
+        for (var i = 0; i < dataList.length; i++) {
+            xData.push(dataList[i].total_date);
+            yData.push(dataList[i].day_accumulated_task);
+        }
+        option.xAxis.data = xData;
+        option.series[0].data = yData;
+        // option.legend.data = ['每日累计指派任务'];
+
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

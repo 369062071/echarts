@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .wrapper {
+            position: relative;
+
+        }
+        #main {
+            width: 800px;
+            height: 600px;
+        }
+        .box {
+            width: 199px;
+            height: 127px;
+            background: transparent;
+            position: absolute;
+            top: 62%;
+            left: 49%;
+            margin-left: -300px;
+            margin-top: -150px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+            <div id="main">
+        
+                </div>
+            
+        <div class="box"></div>
+    </div>
+  
+
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/jquery-3.3.1.js"></script>
+    <script>
+        // app.title = '环形图';
+        var data = {
+            data: [{
+                    value: 335,
+                    name: '直接访问'
+                },
+                {
+                    value: 310,
+                    name: '邮件营销'
+                },
+                {
+                    value: 234,
+                    name: '联盟广告'
+                },
+                {
+                    value: 135,
+                    name: '视频广告'
+                },
+                {
+                    value: 1548,
+                    name: '搜索引擎'
+                }
+            ],
+            legend: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                icon: 'circle',
+                width: 8,
+                height: 8,
+                bottom: 20,
+                x: 'center',
+                data: data.legend
+            },
+            series: [{
+                name: '访问来源',
+                type: 'pie',
+                radius: ['45%', '50%'],
+                avoidLabelOverlap: false,
+                color: ['#6192f4', '#34bfa3', '#f0f3f8'],
+                hoverOffset: 8,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold',
+                            color: '#505066',
+                        },
+                        formatter: function (data) {
+                            console.log(data)
+                            return data.percent + '%'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: data.data
+            }]
+        };
+
+
+        var myChart = echarts.init(document.getElementById('main'));
+
+
+
+
+
+        myChart.setOption(option);
+        var lastMouseOverIndex = 0;
+
+        myChart.dispatchAction({
+            type: 'highlight', //表示默认第一次进入时的高亮
+            // name: '直接访问',
+            dataIndex: lastMouseOverIndex,
+        });
+        
+        myChart.on('mouseover', function (params) {
+            console.log(params)
+            var dataLen = option.series[0].data.length;
+            // if (params.dataIndex == lastMouseOverIndex) return;
+            myChart.dispatchAction({
+                type: 'downplay', //表示默认第一次进入时的高亮
+                // name: '直接访问',
+                dataIndex: lastMouseOverIndex,
+            });
+            lastMouseOverIndex = params.dataIndex;
+
+            myChart.dispatchAction({
+                type: 'highlight', //表示默认第一次进入时的高亮
+                // name: '直接访问',
+                dataIndex: params.dataIndex,
+            });
+        });
+
+        // mouseout事件，将上次的高亮
+        myChart.on('mouseout', function (params) {
+            // if (params.dataIndex == lastMouseOverIndex) return;
+            myChart.dispatchAction({
+                type: 'highlight',
+                // seriesIndex: 0,
+                dataIndex: lastMouseOverIndex
+            })
+        });
+    </script>
+</body>
+
+</html>
